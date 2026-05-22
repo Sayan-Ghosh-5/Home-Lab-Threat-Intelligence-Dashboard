@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # Tier 1: Storage
+  database:
+    image: postgres:latest
+    container_name: homelab_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: homelab_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql
+
+  # Tier 2: Ingestion Gateway
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: homelab_api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+
+  # Tier 3: Analytics UI
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: homelab_dashboard
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    depends_on:
+      - database
+      - api
+
+volumes:
+  pg_data:
