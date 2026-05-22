@@ -47,7 +47,7 @@ flowchart TD
 | :--- | :--- | :--- | :--- |
 | **Packet Sniffer** | [Scapy](https://scapy.net/) | `Python 3.10` | Captures raw layer-3 packets from physical network adapters and forwards them asynchronously. |
 | **Ingestion API** | [Go Standard Library](https://go.dev/) | `Go (Golang)` | Receives network streams concurrently with very low memory footprint and writes records into Postgres. |
-| **Database** | [PostgreSQL 16](https://www.postgresql.org/) | `SQL` | Structured time-series store for network logs with custom `INET` column types for IP optimization. |
+| **Database** | [PostgreSQL 18](https://www.postgresql.org/) | `SQL` | Structured time-series store for network logs with custom `INET` column types for IP optimization. |
 | **SOC Dashboard** | [Streamlit](https://streamlit.io/) | `Python 3.10` | Real-time monitoring and threat feeds, refreshing every 5 seconds. |
 | **Machine Learning** | [scikit-learn](https://scikit-learn.org/) | `Python 3.10` | Unsupervised **Isolation Forest** outlier detection model. |
 | **Orchestration** | [Docker Compose](https://www.docker.com/) | `YAML` | Multi-container microservice container configuration. |
